@@ -39,7 +39,9 @@ if ($navdraweropen) {
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
-$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
+// If the settings menu will be included in the header then don't add it here.
+$regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -63,10 +65,12 @@ $tuto =  navigation_node::create(get_string('tutorial', 'theme_forco'),
     new pix_icon('i/paw', ''));
 
 $flat = new flat_navigation_node($tuto, 0);
-$flat->set_showdivider(true);
+$flat->set_showdivider(true, $label = 'divider');
 $flat->key = 'tuto';
 $PAGE->flatnav->add($flat);
-$templatecontext['flatnavigation'] = $PAGE->flatnav;
+$nav = $PAGE->flatnav;
+$templatecontext['flatnavigation'] = $nav;
+$templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
 
 echo $OUTPUT->render_from_template('theme_forco/columns2', $templatecontext);
 

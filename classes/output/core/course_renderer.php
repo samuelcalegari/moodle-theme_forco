@@ -25,9 +25,11 @@ defined('MOODLE_INTERNAL') || die;
 use moodle_url;
 use lang_string;
 use coursecat_helper;
-use coursecat;
+//use coursecat;
+use core_course_category;
 use stdClass;
-use course_in_list;
+//use course_in_list;
+use core_course_list_element;
 use pix_url;
 use html_writer;
 use heading;
@@ -36,12 +38,12 @@ use single_select;
 
 require_once($CFG->dirroot . '/course/renderer.php');
 
-class course_renderer extends \theme_boost\output\core\course_renderer {
+class course_renderer extends \core_course_renderer  {
 
     public function frontpage_available_courses($id=0) {
 
         global $CFG, $OUTPUT, $PAGE;
-        require_once ($CFG->libdir . '/coursecatlib.php');
+        #require_once ($CFG->libdir . '/coursecatlib.php');
 
         $chelper = new coursecat_helper();
         $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED)->set_courses_display_options(array(
@@ -54,7 +56,7 @@ class course_renderer extends \theme_boost\output\core\course_renderer {
         $chelper->set_attributes(array(
             'class' => 'frontpage-course-list-all'
         ));
-        $courses = coursecat::get($id)->get_courses($chelper->get_courses_display_options());
+        $courses = core_course_category::get($id)->get_courses($chelper->get_courses_display_options());
         $rcourseids = array_keys($courses);
         $acourseids = array_chunk($rcourseids, 4);
 
@@ -72,8 +74,8 @@ class course_renderer extends \theme_boost\output\core\course_renderer {
                     $imgurl = $OUTPUT->image_url('course-default', 'theme');
 
                     if ($course instanceof stdClass) {
-                        require_once ($CFG->libdir . '/coursecatlib.php');
-                        $course = new course_in_list($course);
+                        #require_once ($CFG->libdir . '/coursecatlib.php');
+                        $course = new core_course_list_element($course);
                     }
 
                     foreach ($course->get_course_overviewfiles() as $file) {
@@ -316,8 +318,8 @@ class course_renderer extends \theme_boost\output\core\course_renderer {
                     $imgurl = $OUTPUT->image_url('course-default', 'theme');
 
                     if ($course instanceof stdClass) {
-                        require_once ($CFG->libdir . '/coursecatlib.php');
-                        $course = new course_in_list($course);
+                        #require_once ($CFG->libdir . '/coursecatlib.php');
+                        $course = new core_course_list_element($course);
                     }
 
                     foreach ($course->get_course_overviewfiles() as $file) {
@@ -337,10 +339,11 @@ class course_renderer extends \theme_boost\output\core\course_renderer {
 
     public function course_category($category) {
         global $CFG;
-        require_once($CFG->libdir. '/coursecatlib.php');
-        $coursecat = coursecat::get(is_object($category) ? $category->id : $category);
+        #require_once($CFG->libdir. '/coursecatlib.php');
+        $coursecat = core_course_category::get(is_object($category) ? $category->id : $category);
         $site = get_site();
         $output = '';
+        $categorieslist = core_course_category::make_categories_list();
 
         if (can_edit_in_category($coursecat->id)) {
             // Add 'Manage' button if user has permissions to edit this category.
@@ -349,9 +352,9 @@ class course_renderer extends \theme_boost\output\core\course_renderer {
             $this->page->set_button($managebutton);
         }
         if (!$coursecat->id) {
-            if (coursecat::count_all() == 1) {
+            if (count($categorieslist) == 1) {
                 // There exists only one category in the system, do not display link to it
-                $coursecat = coursecat::get_default();
+                $coursecat = core_course_category::get_default();
                 $strfulllistofcourses = get_string('fulllistofcourses');
                 $this->page->set_title("$site->shortname: $strfulllistofcourses");
             } else {
@@ -360,16 +363,17 @@ class course_renderer extends \theme_boost\output\core\course_renderer {
             }
         } else {
             $title = $site->shortname;
-            if (coursecat::count_all() > 1) {
+
+            if (count($categorieslist) > 1) {
                 $title .= ": ". $coursecat->get_formatted_name();
             }
             $this->page->set_title($title);
 
             // Print the category selector
-            if (coursecat::count_all() > 1) {
+            if (count($categorieslist) > 1) {
                 $output .= html_writer::start_tag('div', array('class' => 'categorypicker'));
                 $select = new single_select(new moodle_url('/course/index.php'), 'categoryid',
-                    coursecat::make_categories_list(), $coursecat->id, null, 'switchcategory');
+                    core_course_category::make_categories_list(), $coursecat->id, null, 'switchcategory');
                 $select->set_label(get_string('categories').':');
                 $output .= $this->render($select);
                 $output .= html_writer::end_tag('div'); // .categorypicker
@@ -434,7 +438,7 @@ class course_renderer extends \theme_boost\output\core\course_renderer {
             $output .= $this->single_button($url, get_string('addnewcourse'), 'get');
         }
         ob_start();
-        if (coursecat::count_all() == 1) {
+        if (count($categorieslist) == 1) {
             print_course_request_buttons(context_system::instance());
         } else {
             print_course_request_buttons($context);

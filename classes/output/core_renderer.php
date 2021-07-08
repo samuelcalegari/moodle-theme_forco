@@ -41,7 +41,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
-        return $this->render_from_template('theme_boost/header', $header);
+        return $this->render_from_template('theme_boost/head', $header);
     }
 
     // Header Front-Page (SlideShow)
@@ -303,7 +303,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $content;
     }
-	
+
 	public function activity_navigation() {
         return '';
     }

@@ -24,10 +24,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 // version du plugin.
-$plugin->version = 2018050800;
+$plugin->version = 2021070800;
 
 // version de Moodle que ce plugin nécessite
-$plugin->requires = 2018050800;
+$plugin->requires = 2021011800;
 
 // nom du composant du plugin - il commence toujours par 'theme_'
 // pour les thèmes et devrait être le même que le nom du dossier.
@@ -35,9 +35,9 @@ $plugin->component = 'theme_forco';
 
 // liste de plugins, ce plugin dépend de (et de leurs versions).
 $plugin->dependencies = [
-    'theme_boost' => 2018051400,
+    'theme_boost' => 2020061500,
     'block_accessplus' => ANY_VERSION
 ];
 
 // numéro de version.
-$plugin->release = 0.1;
+$plugin->release = 0.2;
