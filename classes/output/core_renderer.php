@@ -30,19 +30,6 @@ use user_picture;
 
 class core_renderer extends \theme_boost\output\core_renderer {
 
-    // Header
-    public function full_header() {
-        global $PAGE;
-
-        $header = new stdClass();
-        $header->settingsmenu = $this->context_header_settings_menu();
-        $header->contextheader = $this->context_header();
-        $header->hasnavbar = empty($PAGE->layout_options['nonavbar']);
-        $header->navbar = $this->navbar();
-        $header->pageheadingbutton = $this->page_heading_button();
-        $header->courseheader = $this->course_header();
-        return $this->render_from_template('theme_boost/head', $header);
-    }
 
     // Header Front-Page (SlideShow)
     public function frontpage_header() {
