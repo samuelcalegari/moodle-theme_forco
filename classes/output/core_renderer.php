@@ -130,22 +130,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $html .= html_writer::end_div();
 
-        $html .= html_writer::start_tag('a', array('class' => 'carousel-control-prev', 'href'=>'#front-page-carousel', 'role'=>'button', 'data-slide'=>'prev'));
-        $html .= html_writer::start_tag('i', array('class' => 'carousel-control-prev-icon', 'aria-hidden'=>'true'));
-        $html .= html_writer::end_tag('i');
-        $html .= html_writer::start_tag('span', array('class' => 'sr-only'));
-        $html .= get_string('previous', 'theme_forco');
-        $html .= html_writer::end_tag('span');
-        $html .= html_writer::end_tag('a');
-
-        $html .= html_writer::start_tag('a', array('class' => 'carousel-control-next', 'href'=>'#front-page-carousel', 'role'=>'button', 'data-slide'=>'next'));
-        $html .= html_writer::start_tag('i', array('class' => 'carousel-control-next-icon', 'aria-hidden'=>'true'));
-        $html .= html_writer::end_tag('i');
-        $html .= html_writer::start_tag('span', array('class' => 'sr-only'));
-        $html .= get_string('next', 'theme_forco');
-        $html .= html_writer::end_tag('span');
-        $html .= html_writer::end_tag('a');
-
         $html .= html_writer::end_div();
         $html .= html_writer::end_tag('header');
 
@@ -154,13 +138,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
     // Lien retour haut de page
     public function top_link() {
-        return '<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><i class="fa fa-chevron-up" aria-hidden="true"></i><span class="sr-only">' . get_string('top_link', 'theme_forco') . '</span></a>';
+        return '<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-placement="left"><i class="fa fa-chevron-up" aria-hidden="true"></i><span class="sr-only">' . get_string('top_link', 'theme_forco') . '</span></a>';
     }
 
     // ChatBot
     public function bot() {
         $url = new moodle_url('/blocks/miro_web_bot/bot/index.php');
-        return '<a id="bot" href="' . $url . '" class="btn btn-primary btn-lg bot" role="button" data-toggle="tooltip" data-placement="left" target="_blank"><i class="fa fa-comments-o" aria-hidden="true"></i><span class="sr-only">' . get_string('bot', 'theme_forco') . '</span></a>';
+        return '<a id="bot" href="' . $url . '" class="btn btn-primary btn-lg bot" role="button" data-placement="left" target="_blank"><i class="fa fa-comments-o" aria-hidden="true"></i><span class="sr-only">' . get_string('bot', 'theme_forco') . '</span></a>';
     }
 
     // Zone de Recherche

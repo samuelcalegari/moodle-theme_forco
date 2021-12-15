@@ -57,6 +57,12 @@ h2 {
   min-height: 100% !important;
 }
 
+#region-main {
+  div:first-child {
+    border: none;
+  }
+}
+
 // Footer
 #page-footer {
 
@@ -146,9 +152,8 @@ h2 {
   font-size: .75rem;
   line-height: 1.5rem;
   text-align: center;
-  height: 1.5rem;
+  height: 1rem !important;
   background-color: #eceeef;
-  border-radius: .25rem;
 }
 
 // Others
@@ -420,12 +425,17 @@ a.carousel-control-next {
 
 .carousel-video {
 
+  max-width: 800px !important;
+
   .carousel-indicators {
     bottom : 20px !important;
   }
 
   .carousel-item{
     height:initial;
+    div:first-child {
+      min-height:inherit !important;
+    }
   }
 
   .carousel-caption {
