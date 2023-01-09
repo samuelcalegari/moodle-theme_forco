@@ -225,6 +225,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
         return $OUTPUT->image_url('logo-miro', 'theme');
     }
 
+    public function logosfca() {
+        global $OUTPUT;
+        return $OUTPUT->image_url('logo-sfca', 'theme');
+    }
+
     // date
     public function current_year(){
         return date("Y");
