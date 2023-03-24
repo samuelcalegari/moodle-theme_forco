@@ -16,25 +16,24 @@
 
 /**
  * @package   theme_forco
- * @copyright 2018 Samuel CALEGARI
+ * @copyright 2023 Samuel CALEGARI
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace theme_forco\output;
-defined('MOODLE_INTERNAL') || die;
 
-use html_writer;
-use custom_menu;
+namespace theme_forco\output;
+
 use moodle_url;
-use stdClass;
-use user_picture;
+use html_writer;
+use get_string;
+
+defined('MOODLE_INTERNAL') || die;
 
 class core_renderer extends \theme_boost\output\core_renderer {
 
-
-    // Header Front-Page (SlideShow)
     public function frontpage_header() {
 
         global $PAGE;
+        $html = "";
 
         $hasslide1title = (!empty($PAGE->theme->settings->slide1title));
         $hasslide2title = (!empty($PAGE->theme->settings->slide2title));
@@ -51,10 +50,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if(!$hasslide1image && !$hasslide2image && !$hasslide3image)
             return $this->full_header();
 
-        $html = html_writer::start_tag('header', array('id' => 'page-header', 'class' => 'row'));
-        $html .= html_writer::start_div('col-xs-12 p-a-1 w-100');
-
-        $html .= html_writer::start_div('carousel slide', array('id' => 'front-page-carousel', 'data-ride' => 'carousel'));
+        $html .= html_writer::start_div('carousel slide mb-3', array('id' => 'front-page-carousel', 'data-ride' => 'carousel'));
 
         $html .= html_writer::start_tag('ol', array('class' => 'carousel-indicators'));
         if($hasslide1image) {
@@ -130,88 +126,20 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $html .= html_writer::end_div();
 
-        $html .= html_writer::end_div();
-        $html .= html_writer::end_tag('header');
 
         return $html;
-    }
-
-    // Lien retour haut de page
-    public function top_link() {
-        return '<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-placement="left"><i class="fa fa-chevron-up" aria-hidden="true"></i><span class="sr-only">' . get_string('top_link', 'theme_forco') . '</span></a>';
-    }
-
-    // ChatBot
-    public function bot() {
-        $url = new moodle_url('/blocks/miro_web_bot/bot/index.php');
-        return '<a id="bot" href="' . $url . '" class="btn btn-primary btn-lg bot" role="button" data-placement="left" target="_blank"><i class="fa fa-comments-o" aria-hidden="true"></i><span class="sr-only">' . get_string('bot', 'theme_forco') . '</span></a>';
     }
 
     // Zone de Recherche
     public function search_box($id = false) {
 
-        global $CFG;
-
-        // Si la recherche globale est activé => fonctionement normal / appel de la fonction du parent
-        if ($CFG->enableglobalsearch) {
-            return parent::search_box($id);
-        }
-
-        // Sinon recherche des les cours
-        if ($id == false) {
-            $id = uniqid();
-        } else {
-            $id = clean_param($id, PARAM_ALPHANUMEXT);
-        }
-
-        $this->page->requires->js_call_amd('core/search-input', 'init', array($id));
-
-        $searchicon = html_writer::tag('div', $this->pix_icon('a/search', get_string('search', 'search'), 'moodle'),
-            array('role' => 'button', 'tabindex' => 0));
-
-        $formattrs = array('class' => 'search-input-form', 'action' => $CFG->wwwroot . '/course/search.php');
-
-        $inputattrs = array('type' => 'text', 'name' => 'search', 'placeholder' => get_string('search', 'search'),
-            'size' => 13, 'tabindex' => -1, 'id' => 'coursesearchbox' . $id, 'class' => 'form-control');
-
-        $contents = html_writer::tag('label', get_string('enteryoursearchquery', 'search'),
-                array('for' => 'coursesearchbox' . $id, 'class' => 'sr-only')) . html_writer::tag('input', '', $inputattrs);
-
-        $searchinput = html_writer::tag('form', $contents, $formattrs);
-
-        return html_writer::tag('div', $searchicon . $searchinput, array('class' => 'search-input-wrapper nav-link', 'id' => $id));
-    }
-
-    // Infos Front Page
-    public function frontpage_infos() {
-
-        $html = '';
-        $html .= html_writer::link('#skipavailablecourses','Sauter la présentation',array('class' => 'skip skip-block'));
-
-        $html .= html_writer::start_div('',array('id' => 'frontpage-infos'));
-        $html .= html_writer::start_div('row');
-
-        $html .= html_writer::start_div('col-lg-12');
-        $html .= html_writer::start_tag('h2'). 'La Formation tout au long de la vie' . html_writer::end_tag('h2');
-        $html .= html_writer::end_div();
-
-        $html .= html_writer::start_div('col-lg-6');
-        $html .= 'La Formation Tout au Long de la Vie est une mission prioritaire de l’Université de Perpignan Via Domitia.Le Service de Formation Continue de l’Université de Perpignan aide tous les publics - salariés, non-salariés (travailleurs indépendants), demandeurs d’emploi - à mettre en place leur projet de formation ou de reconversion. Il a aussi pour mission de vous accompagner dans votre démarche de validation de vos acquis professionnels (VAP) et des acquis de l’expérience (VAE).';
-        $html .= html_writer::start_div('',array('style' => 'text-align: right'));
-        $html .= html_writer::link('https://sfc.univ-perp.fr','En savoir +',array('class' => 'btn btn-secondary'));
-        $html .= html_writer::end_div();
-        $html .= html_writer::end_div();
-
-        $html .= html_writer::start_div('col-lg-6');
-        $html .= 'L’ensemble des formations diplômantes et qualifiantes de l’UPVD est accessible en formation continue. Le SFC s’appuie ainsi sur toutes les composantes et instituts de l’UPVD pour mener à bien ses missions.Le SFC met également à votre disposition son savoir-faire en ingénierie de formation en s’appuyant sur le potentiel de recherche et les capacités d’innovation de l’Université pour vos demandes de formations dédiées.';
-        $html .= html_writer::end_div();
-
-        $html .= html_writer::end_div();
-        $html .= html_writer::end_div();
-
-        $html .= html_writer::start_tag('span', array('class' => 'skip-block-to', 'id' => 'skipfrontpageinfos'));
-        $html .= html_writer::end_tag('span');
-        return $html;
+        $data = [
+            'action' => new moodle_url('/course/search.php'),
+            'hiddenfields' => (object) ['name' => 'context', 'value' => $this->page->context->id],
+            'inputname' => 'q',
+            'searchstring' => get_string('search'),
+        ];
+        return $this->render_from_template('core/search_input_navbar', $data);
     }
 
     // Logo
@@ -220,11 +148,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         return $OUTPUT->image_url('logo', 'theme');
     }
 
-    public function logomiro() {
-        global $OUTPUT;
-        return $OUTPUT->image_url('logo-miro', 'theme');
-    }
-
+    // Logo SFCA
     public function logosfca() {
         global $OUTPUT;
         return $OUTPUT->image_url('logo-sfca', 'theme');
@@ -233,54 +157,5 @@ class core_renderer extends \theme_boost\output\core_renderer {
     // date
     public function current_year(){
         return date("Y");
-    }
-
-    public function custom_menu($custommenuitems = '') {
-        global $CFG;
-
-        if (empty($custommenuitems) && !empty($CFG->custommenuitems)) {
-            $custommenuitems = $CFG->custommenuitems;
-        }
-        $custommenu = new custom_menu($custommenuitems, current_language());
-        return $this->render_custom_menu($custommenu);
-    }
-
-    public function render_custom_menu(custom_menu $menu) {
-        global $CFG;
-
-        $langs = get_string_manager()->get_list_of_translations();
-        $haslangmenu = $this->lang_menu() != '';
-
-        if (!$menu->has_children() && !$haslangmenu) {
-            return '';
-        }
-
-        if ($haslangmenu) {
-            $strlang = get_string('language');
-            $currentlang = current_language();
-            if (isset($langs[$currentlang])) {
-                $currentlang = $langs[$currentlang];
-            } else {
-                $currentlang = $strlang;
-            }
-            preg_match( '!\(([^\)]+)\)!', $currentlang , $match );
-            $currentlang = strtoupper($match[1]);
-            $this->language = $menu->add($currentlang, new moodle_url('#'), $strlang, 10000);
-            foreach ($langs as $langtype => $langname) {
-                $this->language->add($langname, new moodle_url($this->page->url, array('lang' => $langtype)), $langname);
-            }
-        }
-
-        $content = '';
-        foreach ($menu->get_children() as $item) {
-            $context = $item->export_for_template($this);
-            $content .= $this->render_from_template('core/custom_menu_item', $context);
-        }
-
-        return $content;
-    }
-
-	public function activity_navigation() {
-        return '';
     }
 }

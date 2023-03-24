@@ -16,7 +16,7 @@
 
 /**
  * @package   theme_forco
- * @copyright 2018 Samuel CALEGARI
+ * @copyright 2023 Samuel CALEGARI
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -76,8 +76,14 @@ $layouts['frontpage'] = array(
     'file' => 'frontpage.php',
     'regions' => array('side-pre'),
     'defaultregion' => 'side-pre',
-    'options' => array('nonavbar' => true)
+    'options' => array('nonavbar' => true),
 );
 $THEME->layouts = $layouts;
 
 $THEME->iconsystem = '\\theme_forco\\output\\icon_system_fontawesome';
+
+$THEME->haseditswitch = true;
+
+$THEME->activityheaderconfig = [
+    'notitle' => true
+];

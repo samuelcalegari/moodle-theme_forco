@@ -15,18 +15,15 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template block_myoverview/course-summary
+    @template block_myoverview/progress-bar
 
-    This template renders the course summary (view by courses) for the myoverview block.
+    This template renders a simple progress bar.
 
     Example context (json):
     {
-        "fullnamedisplay": "course 3",
-        "viewurl": "https://www.google.com",
-        "summary": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+        "progress": 50
     }
 }}
-<div class="course-info-container" id="course-info-container-{{id}}">
-    <h4 class="h5"><a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullnamedisplay}}}</a></h4>
-    {{> block_myoverview/progress_bar}}
+<div class="progress">
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{progress}}%;" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">25%</div>
 </div>

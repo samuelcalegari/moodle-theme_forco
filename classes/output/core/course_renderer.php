@@ -15,12 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Course renderer.
+ *
  * @package   theme_forco
- * @copyright 2018 Samuel CALEGARI
+ * @copyright 2023 Samuel CALEGARI
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace theme_forco\output\core;
-defined('MOODLE_INTERNAL') || die;
 
 use moodle_url;
 use lang_string;
@@ -36,9 +38,13 @@ use heading;
 use image_url;
 use single_select;
 
-require_once($CFG->dirroot . '/course/renderer.php');
 
-class course_renderer extends \core_course_renderer  {
+/**
+ * @package    theme_forco
+ * @copyright 2023 Samuel CALEGARI
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class course_renderer extends \core_course_renderer {
 
     public function frontpage_available_courses($id=0) {
 

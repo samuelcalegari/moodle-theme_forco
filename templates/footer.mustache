@@ -15,46 +15,118 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
+    @template theme_boost/footer
+
     Page footer.
+
+    Example context (json):
+    {
+        "output": {
+            "page_doc_link": "Help and documentation",
+            "supportemail": "<a href=\"#\">Contact site support</a>",
+            "has_popover_links": true,
+            "services_support": "Services and support",
+            "login_info": "You are logged in as cute kitten",
+            "moodle_release": "90210"
+        }
+    }
 }}
-<footer id="page-footer" class="py-3 bg-dark text-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <h2>A propos</h2>
-                <p>
-                    Université de Perpignan Via Domitia <br>
-                    52 avenue Paul Alduy <br>
-                    66860 PERPIGNAN Cedex 9
-                </p>
-                <p> Copyright © {{{output.current_year}}}</p>
+
+<footer id="page-footer" class="footer-popover bg-white">
+    <div data-region="footer-container-popover">
+        <button class="btn btn-icon bg-secondary icon-no-margin btn-footer-popover" data-action="footer-popover" aria-label="{{#str}}showfooter, theme_boost{{/str}}">
+            {{#pix}}e/question, core{{/pix}}
+        </button>
+        <button id="back-to-top" class="btn btn-icon bg-secondary icon-no-margin btn-footer-top" aria-label="{{#str}}top_link, theme_forco{{/str}}">
+            {{#pix}}i/up, core{{/pix}}
+        </button>
+    </div>
+    <div class="footer-content-popover container" data-region="footer-content-popover">
+        {{# output.has_popover_links }}
+            <div class="footer-section p-3 border-bottom">
+                {{# output.page_doc_link }}
+                    <div class="footer-support-link">{{{ output.page_doc_link }}}</div>
+                {{/ output.page_doc_link }}
+
+                {{# output.services_support_link }}
+                    <div class="footer-support-link">{{{ output.services_support_link }}}</div>
+                {{/ output.services_support_link }}
+
+                {{# output.supportemail }}
+                    <div class="footer-support-link">{{{ output.supportemail }}}</div>
+                {{/ output.supportemail }}
             </div>
-            <div class="col-md-3">
-                <h2>Infos</h2>
-                <p>
-                    <a href="https://www.facebook.com/UPVD66" target="_blank" aria-label="Voir la page facebook de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-facebook" aria-hidden="true"></i></a>
-                    <a href="https://twitter.com/upvd1" target="_blank" aria-label="Voir la page twitter de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-twitter" aria-hidden="true"></i></a>
-                    <a href="https://www.linkedin.com/company/university-of-perpignan-france" target="_blank" aria-label="Voir la page linkedin de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-linkedin" aria-hidden="true"></i></a>
-                    <a href="https://www.youtube.com/user/serviceComUPVD" target="_blank" aria-label="Voir la chaîne youtube de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-youtube" aria-hidden="true"></i></a>
-                </p>
+        {{/ output.has_popover_links }}
+        <div class="footer-section p-3 border-bottom">
+            <div class="logininfo">
+                {{{ output.login_info }}}
             </div>
-            <div class="col-md-4">
-                <h2>Contactez-nous</h2>
-                <p>
-                    SFCA - Service Formation Continue et Alternance<br>
-                    Bâtiment Z, 1er étage<br>
-                    52 avenue Paul Alduy<br>
-                    66860 Perpignan Cedex 9<br>
-                    <br>
-                    EMail. <a href="sfc@univ-perp.fr"> sfc@univ-perp.fr </a><br>
-                    Web. <a href="https://sfc.univ-perp.fr/" target="_blank">https://sfc.univ-perp.fr/</a>
-                </p>
-                <p>
-                    <img src="{{{ output.logosfca }}}" alt="" id="logosfca">
-                </p>
+            <div class="tool_usertours-resettourcontainer">
+            </div>
+
+            {{{ output.standard_footer_html }}}
+            {{{ output.standard_end_of_body_html }}}
+        </div>
+        <div class="footer-section p-3">
+            <div>{{#str}}poweredbymoodle, core{{/str}}</div>
+            {{#output.moodle_release}}
+                <div>
+                    {{#str}}version, core{{/str}} {{{ output.moodle_release }}}
+                </div>
+            {{/output.moodle_release}}
+        </div>
+    </div>
+
+    <div class="footer-content-debugging py-3">
+        <div class="container">
+            {{{ output.debug_footer_html }}}
+        </div>
+    </div>
+
+    <div class="footer-content-infos py-3 text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2>A propos</h2>
+                    <p>
+                        Université de Perpignan Via Domitia <br>
+                        52 avenue Paul Alduy <br>
+                        66860 PERPIGNAN Cedex 9
+                    </p>
+                    <p> Copyright © {{{output.current_year}}}</p>
+                    <p>
+                        <img src="{{{ output.logosfca }}}" alt="" id="logosfca">
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h2>Infos</h2>
+                    <p>
+                        <a href="https://www.facebook.com/UPVD66" target="_blank" aria-label="Voir la page facebook de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/upvd1" target="_blank" aria-label="Voir la page twitter de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/company/university-of-perpignan-france" target="_blank" aria-label="Voir la page linkedin de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-linkedin" aria-hidden="true"></i></a>
+                        <a href="https://www.youtube.com/user/serviceComUPVD" target="_blank" aria-label="Voir la chaîne youtube de l'Université de Perpignan (nouvelle fenêtre)"><i class="fa fa-lg fa-youtube" aria-hidden="true"></i></a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Contactez-nous</h2>
+                    <p>
+                        SFCA - Service Formation Continue et Alternance<br>
+                        Bâtiment Z, 1er étage<br>
+                        52 avenue Paul Alduy<br>
+                        66860 Perpignan Cedex 9<br>
+                        <br>
+                        EMail. <a href="sfc@univ-perp.fr"> sfc@univ-perp.fr </a><br>
+                        Web. <a href="https://sfc.univ-perp.fr/" target="_blank">https://sfc.univ-perp.fr/</a>
+                    </p>
+                </div>
             </div>
         </div>
-        {{{ output.standard_footer_html }}}
-        {{{ output.standard_end_of_body_html }}}
     </div>
+
 </footer>
+
+{{#js}}
+    require(['theme_boost/footer-popover'], function(FooterPopover) {
+    FooterPopover.init();
+    });
+{{/js}}

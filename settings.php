@@ -110,8 +110,4 @@ if ($ADMIN->fulltree) {
 
     // Must add the page after defining all the settings!
     $settings->add($page);
-
 }
-
-$ADMIN->add('root', new admin_externalpage('miro-tools', get_string('miro-tools', 'theme_forco') . ' *', 'http://mirodev.univ-perp.fr:3000'));
-

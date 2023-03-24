@@ -16,7 +16,7 @@
 
 /**
  * @package   theme_forco
- * @copyright 2018 Samuel CALEGARI
+ * @copyright 2023 Samuel CALEGARI
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

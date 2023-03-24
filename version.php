@@ -16,7 +16,7 @@
 
 /**
  * @package   theme_forco
- * @copyright 2018 Samuel CALEGARI
+ * @copyright 2023 Samuel CALEGARI
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -24,10 +24,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 // version du plugin.
-$plugin->version = 2023010900;
+$plugin->version = 2023036400;
 
 // version de Moodle que ce plugin nécessite
-$plugin->requires = 2020061511;;
+$plugin->requires = 2022111800;;
 
 // nom du composant du plugin - il commence toujours par 'theme_'
 // pour les thèmes et devrait être le même que le nom du dossier.
@@ -35,9 +35,8 @@ $plugin->component = 'theme_forco';
 
 // liste de plugins, ce plugin dépend de (et de leurs versions).
 $plugin->dependencies = [
-    'theme_boost' => 2020061500,
-    'block_accessplus' => ANY_VERSION
+    'theme_boost' => 2022111800
 ];
 
 // numéro de version.
-$plugin->release = 0.2;
+$plugin->release = 2.1;

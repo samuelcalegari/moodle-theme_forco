@@ -18,7 +18,7 @@
  * Language file.
  *
  * @package   theme_forco
- * @copyright 2018 Samuel CALEGARI
+ * @copyright 2023 Samuel CALEGARI
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -49,14 +49,7 @@ $string['next'] = 'Next';
 
 //Links
 $string['top_link'] = 'Click to return on the top page';
-$string['bot'] = 'Chat with our virtual assistant';
 $string['tutorial'] = 'Tutorials';
 
 //Cours
 $string['seecourse'] = 'See Course';
-
-//Gestionnaire Video
-$string['miro-tools'] = 'Miro Tools Video Manager';
-
-//Module Access Plus
-$string['activatebar'] = 'Enable / Disable';
