@@ -429,6 +429,45 @@ h2 {
     }
   }
 
+// Carousel Video
+.carousel-video {
+
+  .carousel-indicators {
+    bottom : 20px !important;
+  }
+
+  .carousel-item{
+    height:initial;
+  }
+
+  .carousel-caption {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    left: 0;
+    text-align: center;
+  }
+
+  a.carousel-control-prev, a.carousel-control-next {
+    top: initial;
+    bottom: initial;
+    height: 50%;
+    top: 10%;
+  }
+
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    border: inset 10px transparent;
+    box-sizing: border-box;
+  }
+}
+
 // Dashboard
 .dashboard-card {
   .progress {
