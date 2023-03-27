@@ -333,107 +333,119 @@ h2 {
   box-shadow: $box-shadow;
 }
 
-  .carousel-item {
-    height: 400px;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
+.carousel-item {
+  height: 400px;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.carousel-indicators {
+  bottom: 0 !important;
+
+  li {
+    width: 40px;
+    height: 8px;
+    margin: 2px;
+    border-radius: 0px;
   }
 
-  .carousel-indicators {
-    bottom: 0 !important;
+  .active {
+    width: 40px;
+    height: 8px;
+    margin: 2px;
+    background-color: $colorthemeforco2;
+    border-radius: 0px;
+  }
+}
 
-    li {
-      width: 40px;
-      height: 8px;
-      margin: 2px;
-      border-radius: 0px;
-    }
+a.carousel-control-prev {
+  top: 13px;
+  bottom: 13px;
+  left: 13px;
+}
 
-    .active {
-      width: 40px;
-      height: 8px;
-      margin: 2px;
-      background-color: $colorthemeforco2;
-      border-radius: 0px;
-    }
+a.carousel-control-next {
+  top: 13px;
+  bottom: 13px;
+  right: 13px;
+}
+
+.carousel-control-prev-icon {
+  font-size: 35px;
+  position: absolute;
+  left: 30px;
+  bottom: 40%;
+  padding: 20px;
+}
+
+.carousel-control-next-icon {
+  font-size: 35px;
+  position: absolute;
+  right: 30px;
+  bottom: 40%;
+  padding: 20px;
+}
+
+.carousel-item {
+  height: 400px;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.carousel-caption {
+  position: absolute;
+  //z-index: 1;
+  display: table;
+  width: 50%;
+  top: 80px;
+  left: 5%;
+  text-align: left;
+
+  h3 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700 !important;
+    background: $colorthemeforco2;
+    color: #fff;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    display: block;
+    line-height: 1.5em;
+    margin-right: 5%;
+    padding-left: 10px;
+    text-rendering: optimizelegibility;
   }
 
-  a.carousel-control-prev {
-    top: 13px;
-    bottom: 13px;
-    left: 13px;
-  }
-
-  a.carousel-control-next {
-    top: 13px;
-    bottom: 13px;
-    right: 13px;
-  }
-
-  .carousel-control-prev-icon {
-    font-size: 35px;
-    position: absolute;
-    left: 30px;
-    bottom: 40%;
-    padding: 20px;
-  }
-
-  .carousel-control-next-icon {
-    font-size: 35px;
-    position: absolute;
-    right: 30px;
-    bottom: 40%;
-    padding: 20px;
-  }
-
-  .carousel-item {
-    height: 400px;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-  }
-
-  .carousel-caption {
-    position: absolute;
-    //z-index: 1;
-    display: table;
-    width: 40%;
-    left: 5%;
-    text-align: left;
-
+  @include media-breakpoint-up(sm) {
     h3 {
-      font-family: "Open Sans", sans-serif;
-      font-weight: 700 !important;
-      background: $colorthemeforco2;
-      color: #fff;
-      text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-      display: block;
       font-size: 2em;
-      line-height: 1.5em;
-      margin-right: 5%;
-      padding-left: 10px;
-      text-rendering: optimizelegibility;
-    }
-
-    span {
-      background: none repeat scroll 0 0 $colorthemeforco2;
-      color: #fff;
-      text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-      display: block;
-      font-size: 14px;
-      line-height: 24px;
-      margin-left: 5%;
-      padding: 15px 20px;
-      border-left: 4px solid $colorthemeforco2;
     }
   }
+
+  @include media-breakpoint-down(sm) {
+    h3 {
+      font-size: 1.5em;
+    }
+  }
+
+  span {
+    background: none repeat scroll 0 0 $colorthemeforco2;
+    color: #fff;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    display: block;
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 5%;
+    padding: 15px 20px;
+    border-left: 4px solid $colorthemeforco2;
+  }
+}
 
 // Carousel Video
 .carousel-video {
 
   .carousel-indicators {
-    bottom : 20px !important;
+    bottom : 3px !important;
   }
 
   .carousel-item{
@@ -445,7 +457,7 @@ h2 {
     left: 0;
     top: 0;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     left: 0;
     text-align: center;
   }
@@ -453,13 +465,22 @@ h2 {
   a.carousel-control-prev, a.carousel-control-next {
     top: initial;
     bottom: initial;
-    height: 50%;
+    height: 60%;
     top: 10%;
   }
 
-  .carousel-control-prev-icon, .carousel-control-next-icon {
-    width: 50px;
-    height: 50px;
+  @include media-breakpoint-up(lg) {
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      width: 10px;
+      height: 10px;
+    }
   }
 
   .carousel-control-prev-icon, .carousel-control-next-icon {
