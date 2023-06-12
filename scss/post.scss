@@ -516,6 +516,10 @@ div[data-region="completion-info"] { // Add bottom margin for completion button
  margin-bottom: 5px;
 }
 
+.summary > div {
+  overflow: hidden;
+}
+
 // Other
 .modified {
   display:none;
