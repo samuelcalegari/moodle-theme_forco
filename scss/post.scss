@@ -557,3 +557,7 @@ div[data-region="filter"] {
 #jump-to-activity {
   margin: 20px 0;
 }
+
+.modal-body .carousel-inner{
+  overflow: auto !important;
+}
